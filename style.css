@@ -1,0 +1,258 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    font-family: Arial, sans-serif;
+    background: url("images/bg.jpg") no-repeat center center/cover;
+    min-height: 100vh;
+    color: #333;
+}
+
+/* Dark overlay */
+body::before {
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.55);
+    z-index: -1;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    background: rgba(146, 207, 238, 0.95);
+    backdrop-filter: blur(5px);
+}
+
+.button{
+    align-items:right;
+}
+
+.navbar h2 {
+    font-size: 20px;
+}
+
+/* Hero */
+.hero {
+    text-align: center;
+    color: white;
+    margin: 20px 0;
+}
+
+/* Filters */
+.filters {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.filters button {
+    margin: 5px;
+    padding: 8px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* Search */
+.search-box {
+    text-align: center;
+    margin: 15px;
+}
+
+.search-box input {
+    padding: 10px;
+    width: 260px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+}
+
+/* Menu Grid */
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px;
+}
+
+/* Card */
+.card {
+    background: rgba(255,255,255,0.95);
+    margin: 12px;
+    padding: 12px;
+    width: 170px;
+    text-align: center;
+    border-radius: 12px;
+    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+    transform: translateY(-5px) scale(1.03);
+}
+
+.card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* Cart Sidebar */
+.cart {
+    position: fixed;
+    right: -320px;
+    top: 0;
+    width: 320px;
+    height: 100%;
+    background: rgb(201, 232, 240);
+    padding: 20px;
+    transition: 0.3s;
+    overflow-y: auto;
+    box-shadow: -4px 0 10px rgba(0,0,0,0.1);
+}
+
+.cart.active {
+    right: 0;
+}
+
+/* Popup */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    transition: 0.3s;
+    width: 280px;
+}
+
+.popup.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Buttons */
+button {
+    background: #118eb4;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    margin: 5px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #1b0388;
+}
+
+/* Order button */
+.order-btn {
+    width: 100%;
+    background: green;
+    font-weight: bold;
+}
+
+.order-btn:hover {
+    background: darkgreen;
+}
+
+/* Location Input */
+#location {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* Scrollbar (optional but nice) */
+.cart::-webkit-scrollbar {
+    width: 5px;
+}
+
+.cart::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+
+/* DARK MODE */
+.dark-mode {
+    background: #121212;
+    color: #fff;
+}
+
+/* Navbar */
+.dark-mode .navbar {
+    background: #1e1e1e;
+    color: white;
+}
+
+/* Cards */
+.dark-mode .card {
+    background: #1f1f1f;
+    color: white;
+}
+
+/* Cart */
+.dark-mode .cart {
+    background: #8b8989;
+    color: rgb(0, 5, 9);
+}
+
+/* Popup */
+.dark-mode .popup {
+    background: #1e1e1e;
+    color: white;
+}
+
+/* Inputs */
+.dark-mode input {
+    background: #2c2c2c;
+    color: white;
+    border: 1px solid #555;
+}
+
+/* Buttons */
+.dark-mode button {
+    background: #333;
+}
+
+.dark-mode button:hover {
+    background: #555;
+}
+
+.payment-box {
+    background: #f9f9f9;
+    padding: 12px;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.payment-box label {
+    display: block;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.payment-box label:hover {
+    background: #eee;
+    border-radius: 5px;
+}
+
+.mobile {
+    max-width: 375px;
+    margin: auto;
+    border: 10px solid black;
+    border-radius: 20px;
+}

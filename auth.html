@@ -1,0 +1,177 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Login - UrbanPlatter</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836') no-repeat center center/cover;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Blur overlay */
+    body::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(8px);
+        background: rgba(0,0,0,0.4);
+        z-index: 0;
+    }
+
+    .container {
+        position: relative;
+        z-index: 1;
+        width: 320px;
+        padding: 25px;
+        border-radius: 15px;
+        background: rgba(255,255,255,0.1);
+        backdrop-filter: blur(15px);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        text-align: center;
+        color: white;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        border: none;
+        border-radius: 8px;
+        background: #ff6600;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #e65c00;
+    }
+
+    .toggle {
+        margin-top: 10px;
+        cursor: pointer;
+        color: #ffd700;
+    }
+
+    .error {
+        color: #ff4d4d;
+        font-size: 14px;
+    }
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+    <h2 id="formTitle">Login</h2>
+
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+
+    <p class="error" id="errorMsg"></p>
+
+    <button onclick="handleAuth()">Login</button>
+
+    <p class="toggle" onclick="toggleForm()">Don't have an account? Sign Up</p>
+
+</div>
+
+<script>
+
+let isLogin = true;
+
+function toggleForm() {
+    isLogin = !isLogin;
+
+    document.getElementById("formTitle").innerText = isLogin ? "Login" : "Sign Up";
+    document.querySelector("button").innerText = isLogin ? "Login" : "Sign Up";
+    document.querySelector(".toggle").innerText = isLogin 
+        ? "Don't have an account? Sign Up"
+        : "Already have an account? Login";
+
+    document.getElementById("errorMsg").innerText = "";
+}
+
+function handleAuth() {
+    let user = document.getElementById("username").value.trim();
+    let pass = document.getElementById("password").value.trim();
+    let error = document.getElementById("errorMsg");
+
+    // Validation
+    if (!user || !pass) {
+        error.innerText = "⚠ Please fill all fields";
+        return;
+    }
+
+    if (user.length < 3) {
+        error.innerText = "⚠ Username must be at least 3 characters";
+        return;
+    }
+
+    if (pass.length < 4) {
+        error.innerText = "⚠ Password must be at least 4 characters";
+        return;
+    }
+
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+
+    if (isLogin) {
+        // LOGIN
+        let foundUser = users.find(u => u.username === user && u.password === pass);
+
+        if (foundUser) {
+            localStorage.setItem("loggedIn", "true");
+            localStorage.setItem("user", user);
+            window.location.href = "index.html";
+        } else {
+            error.innerText = "❌ Invalid credentials";
+        }
+
+    } else {
+        // SIGNUP
+
+        let exists = users.find(u => u.username === user);
+
+        if (exists) {
+            error.innerText = "⚠ User already exists";
+            return;
+        }
+
+        users.push({ username: user, password: pass });
+        localStorage.setItem("users", JSON.stringify(users));
+
+        error.style.color = "lightgreen";
+        error.innerText = "✅ Signup successful! Please login";
+
+        toggleForm();
+    }
+}
+
+</script>
+
+</body>
+</html>
+```

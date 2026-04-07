@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order History</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url("images/bg.jpg") no-repeat center/cover;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        #orders {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .order-card {
+            background: #fff;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .order-card p {
+            margin: 6px 0;
+            color: #444;
+        }
+
+        .order-card b {
+            color: #000;
+        }
+
+        .order-items {
+            margin-top: 8px;
+            padding-left: 15px;
+        }
+
+        .order-items li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Your Orders</h2>
+<div id="orders"></div>
+
+<script>
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+let container = document.getElementById("orders");
+
+orders.reverse().forEach(order => {
+    let div = document.createElement("div");
+    div.classList.add("order-card");
+
+    div.innerHTML = `
+        <p><b>Date:</b> ${order.date}</p>
+        <p><b>Location:</b> ${order.location}</p>
+        <p><b>Payment:</b> ${order.payment}</p>
+
+        <b>Items:</b>
+        <ul class="order-items">
+            ${order.items.map(i => `<li>${i.item} - ₹${i.price}</li>`).join("")}
+        </ul>
+    `;
+
+    container.appendChild(div);
+});
+</script>
+
+</body>
+</html>
